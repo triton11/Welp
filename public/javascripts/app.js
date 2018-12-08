@@ -16,10 +16,11 @@ var app = angular.module('angularjsNodejsTutorial',[]);
 app.controller('insertController', function($scope, $http) {
         $scope.message="";
         $scope.Insert = function() {
-        var request = $http.get('/data/'+$scope.login+'/data/'+$scope.name+'/data/'+$scope.sex+
-            '/data/'+$scope.RelationshipStatus+'/data/'+$scope.Birthyear);
+        var request = $http.get('/data/'+$scope.city+'/data/'+$scope.budget+'/data/'+$scope.timeStart+
+            '/data/'+$scope.timeEnd+'/data/'+$scope.day+'/data/'+$scope.occassion);
         request.success(function(data) {
             $scope.data = data;
+            console.log(data);
         });
         request.error(function(data){
             console.log('err');

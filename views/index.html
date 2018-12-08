@@ -25,24 +25,114 @@
          <div ng-controller="insertController">
         <p><span aria-hidden="true" class="glyphicon text-primary glyphicon-search"></span> Enter constraints to start:
         </p>
-            City: <input type="text" name="login" ng-model="login" value=""/></br>
-            State: <input type="text" name="name" ng-model="name" value=""/></br>
-            Budget: <input type="text" name="sex" ng-model="sex" value=""/></br>
-            Time: <input type="text" name="RelationshipStatus" ng-model="RelationshipStatus" value=""/></br>
-            <!-- Birthyear <input type="text" name="Birthyear" ng-model="Birthyear" value=""/></br> -->
+            City: <input type="text" name="city" ng-model="city" value=""/></br>
+            <!-- State: <input type="text" name="name" ng-model="name" value=""/></br> -->
+            Budget: 
+            <form method="get" action="/">
+                <p>
+                    <select name="budget" ng-model="budget">
+                       <option ng-selected="Price1">$</option>
+                       <option ng-selected="Price2">$$</option>
+                       <option ng-selected="Price3">$$$</option>
+                       <option ng-selected="Price4">$$$$</option>
+                    </select>
+                </p>
+                <!-- <input ng-model="budget"> -->
+            </form>
+            <!-- <input type="text" name="sex" ng-model="sex" value=""/></br> -->
+            Time Start: 
+            <form method="get" action="/">
+                <p>
+                    <select name="timeStart" ng-model="timeStart">
+                       <option ng-selected="6">6:00</option>
+                       <option ng-selected="7">7:00</option>
+                       <option ng-selected="8">8:00</option>
+                       <option ng-selected="9">9:00</option>
+                       <option ng-selected="10">10:00</option>
+                       <option ng-selected="11">11:00</option>
+                       <option ng-selected="12">12:00</option>
+                       <option ng-selected="13">13:00</option>
+                       <option ng-selected="14">14:00</option>
+                       <option ng-selected="15">15:00</option>
+                       <option ng-selected="16">16:00</option>
+                       <option ng-selected="17">17:00</option>
+                       <option ng-selected="18">18:00</option>
+                       <option ng-selected="19">19:00</option>
+                       <option ng-selected="20">20:00</option>
+                       <option ng-selected="21">21:00</option>
+                       <option ng-selected="22">22:00</option>
+                       <option ng-selected="23">23:00</option>
+                       <option ng-selected="24">24:00</option>
+                    </select>
+                </p>
+            </form> Time End: 
+            <form method="get" action="/">
+                <p>
+                    <select name="timeEnd" ng-model="timeEnd">
+                       <option ng-selected="6">6:00</option>
+                       <option ng-selected="7">7:00</option>
+                       <option ng-selected="8">8:00</option>
+                       <option ng-selected="9">9:00</option>
+                       <option ng-selected="10">10:00</option>
+                       <option ng-selected="11">11:00</option>
+                       <option ng-selected="12">12:00</option>
+                       <option ng-selected="13">13:00</option>
+                       <option ng-selected="14">14:00</option>
+                       <option ng-selected="15">15:00</option>
+                       <option ng-selected="16">16:00</option>
+                       <option ng-selected="17">17:00</option>
+                       <option ng-selected="18">18:00</option>
+                       <option ng-selected="19">19:00</option>
+                       <option ng-selected="20">20:00</option>
+                       <option ng-selected="21">21:00</option>
+                       <option ng-selected="22">22:00</option>
+                       <option ng-selected="23">23:00</option>
+                       <option ng-selected="24">24:00</option>
+                    </select>
+                </p>
+                <!-- <input ng_model="occassion"> -->
+            </form>
+            Day: 
+            <form method="get" action="/">
+                <p>
+                    <select name="day" ng-model="day">
+                       <option ng-selected="Monday">Monday</option>
+                       <option ng-selected="Tuesday">Tuesday</option>
+                       <option ng-selected="Wednesday">Wednesday</option>
+                       <option ng-selected="Thursday">Thursday</option>
+                       <option ng-selected="Friday">Friday</option>
+                       <option ng-selected="Saturday">Saturday</option>
+                       <option ng-selected="Sunday">Sunday</option>
+                    </select>
+                </p>
+                <!-- <input ng_model="occassion"> -->
+            </form>
+            Occassion: 
+            <form method="get" action="/">
+                <p>
+                    <select name="occassion" ng-model="occassion">
+                       <option ng-selected="Date">Date</option>
+                       <option ng-selected="Exploring">Exploring</option>
+                       <option ng-selected="Birthday">Birthday</option>
+                       <option ng-selected="WorkDay">Work Day</option>
+                    </select>
+                </p>
+                <!-- <input ng_model="occassion"> -->
+            </form>
+            <!-- <input type="text" name="Birthyear" ng-model="Birthyear" value=""/></br> -->
             <button type="button" ng-click="Insert()" class="button">Insert</button></br>
 
         <table border="0" cellpadding="10" cellspacing="1" width="500" align="center"> 
             <tr> 
-            <td> City </td>
-            <td> State </td>
-            <td> Stars </td>
-            <td> Review Count </td>
+            <td> Business   </td>
+            <td> Categories     </td>
+            <td> Stars  </td>
+            <td> Review Count   </td>
             <!-- <td> Birthyear </td> -->
             <tr ng-repeat="x in data"> 
-            <td> {{x.city}} </td>
-            <td> {{x.state}} </td>
-            <td> {{x.stars}} </td>
+            <td> {{x.name}}     </td>
+            <td> {{x.categories}}   </td>
+            <td> {{x.stars}}    </td>
             <td> {{x.review_count}} </td>
             <!-- <td> {{x.birthyear}} </td> -->
             </tr>
