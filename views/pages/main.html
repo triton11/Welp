@@ -1,0 +1,135 @@
+<h1 align="center">
+  Welcome to Welp!
+</h1>
+<div class="container" align="center">
+    <p><span aria-hidden="true" class="glyphicon text-primary glyphicon-search"></span> Enter constraints to start:</p>
+    <div><label align="center">City: <input class="form-control" type="text" name="city" ng-model="city" value=""/></label></div></br>
+    <!-- Budget: 
+    <form method="get" action="/">
+        <p>
+            <select name="budget" ng-model="budget">
+               <option ng-selected="Price1">$</option>
+               <option ng-selected="Price2">$$</option>
+               <option ng-selected="Price3">$$$</option>
+               <option ng-selected="Price4">$$$$</option>
+            </select>
+        </p>
+    </form> -->
+    <form method="get" action="/">
+      <div class="form-group">
+      <label> Start Time: 
+      <select class="form-control" name="timeStart" ng-model="timeStart" id="ts">
+         <option ng-selected="6">6</option>
+         <option ng-selected="7">7</option>
+         <option ng-selected="8">8</option>
+         <option ng-selected="9">9</option>
+         <option ng-selected="10">10</option>
+         <option ng-selected="11">11</option>
+         <option ng-selected="12">12</option>
+         <option ng-selected="13">13</option>
+         <option ng-selected="14">14</option>
+         <option ng-selected="15">15</option>
+         <option ng-selected="16">16</option>
+         <option ng-selected="17">17</option>
+         <option ng-selected="18">18</option>
+         <option ng-selected="19">19</option>
+         <option ng-selected="20">20</option>
+         <option ng-selected="21">21</option>
+         <option ng-selected="22">22</option>
+         <option ng-selected="23">23</option>
+         <option ng-selected="24">24</option>
+      </select>
+    </label>
+  </div>
+    </form>
+    <form method="get" action="/">
+        <div class="form-group">
+          <label> End Time: 
+            <select class="form-control" name="timeEnd" ng-model="timeEnd">
+               <option ng-selected="6">6</option>
+               <option ng-selected="7">7</option>
+               <option ng-selected="8">8</option>
+               <option ng-selected="9">9</option>
+               <option ng-selected="10">10</option>
+               <option ng-selected="11">11</option>
+               <option ng-selected="12">12</option>
+               <option ng-selected="13">13</option>
+               <option ng-selected="14">14</option>
+               <option ng-selected="15">15</option>
+               <option ng-selected="16">16</option>
+               <option ng-selected="17">17</option>
+               <option ng-selected="18">18</option>
+               <option ng-selected="19">19</option>
+               <option ng-selected="20">20</option>
+               <option ng-selected="21">21</option>
+               <option ng-selected="22">22</option>
+               <option ng-selected="23">23</option>
+               <option ng-selected="24">24</option>
+            </select>
+        </div>
+      </label> 
+        <!-- <input ng_model="occassion"> -->
+    </form>
+    <form method="get" action="/">
+      <div class="form-group">
+        <label>Day: 
+            <select class="form-control" name="day" ng-model="day">
+               <option ng-selected="monday">monday</option>
+               <option ng-selected="tuesday">tuesday</option>
+               <option ng-selected="wednesday">wednesday</option>
+               <option ng-selected="thursday">thursday</option>
+               <option ng-selected="friday">friday</option>
+               <option ng-selected="saturday">saturday</option>
+               <option ng-selected="sunday">sunday</option>
+            </select>
+        </div>
+      </label>
+    </form>
+    <div class="form-check form-check-inline">
+    Breakfast?
+    <input class="form-check-input" type="checkbox" ng-model="breakfast"
+           ng-true-value="true" ng-false-value="false"></input>
+         </div>
+    <div class="form-check form-check-inline">
+                 <br>
+
+    Lunch?
+    <input class="form-check-input" type="checkbox" ng-model="lunch"
+           ng-true-value="true" ng-false-value="false"></input>
+         </div>
+    <div class="form-check form-check-inline">
+                 <br>
+
+    Dinner?
+    <input class="form-check-input" type="checkbox" ng-model="dinner"
+           ng-true-value="true" ng-false-value="false"></input>
+         </div>
+           <br>
+    <form method="get" action="/">
+        <div class="form-group">
+          <label> Experience: 
+            <select class="form-control" name="occassion" ng-model="occassion">
+               <option ng-selected="Arts &amp; Entertainment">Arts &amp; Entertainment</option>
+               <option ng-selected="Active Life">Active Life</option>
+               <option ng-selected="Food">Food</option>
+            </select>
+          </label>
+        </div>
+        <!-- <input ng_model="occassion"> -->
+    </form>
+    <!-- <input type="text" name="Birthyear" ng-model="Birthyear" value=""/></br> -->
+    <button class="btn btn-primary" type="button" ng-click="Insert()" class="button">Plan!</button></br>
+  <!-- <table border="0" cellpadding="10" cellspacing="1" width="500" align="center"> 
+      <tr> 
+      <td> Business   </td>
+      <td> Categories     </td>
+      <td> Stars  </td>
+      <td> Review Count   </td>
+      <tr ng-repeat="x in data"> 
+      <td> {{x.name}}     </td>
+      <td> {{x.categories}}   </td>
+      <td> {{x.stars}}    </td>
+      <td> {{x.review_count}} </td>
+      </tr>
+  </table> -->
+</div>

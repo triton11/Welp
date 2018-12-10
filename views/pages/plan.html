@@ -1,0 +1,23 @@
+<h1>Final Itinerary!</h1>
+<div class="container" align="center">
+  <table class="table table-striped"> 
+    <thead>
+        <tr> 
+            <td> Business   </td>
+            <td> Categories     </td>
+            <td> Stars  </td>
+            <td> Replace? </td>
+        </tr>
+    </thead>
+    <!-- <td> Birthyear </td> -->
+    <h3>Activity Plan: </h3>
+    <tr ng-repeat="x in data"> 
+        <td> {{x.name}}     </td>
+        <td> {{x.categories}} </td>
+        <td> {{x.stars}}    </td>
+        <td> <button class="btn btn-primary" ng-click="Replace(x, 'Food', $index)">Food</button> </td>
+        <td> <button class="btn btn-primary" ng-click="Replace(x, 'Active Life', $index)">Active Life</button> </td>
+        <td> <button class="btn btn-primary" ng-click="Replace(x, 'Arts &amp; Entertainment', $index)">Arts &amp; Entertainment</button> </td>
+    </tr>
+  </table>
+</div>

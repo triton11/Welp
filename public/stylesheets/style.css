@@ -1,8 +1,23 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+label {
+	font-weight: normal;
+}
+
+.form-group label {
+    float: middle;
+    text-align: left;
+    font-weight: normal;
+}
+
+.form-group select {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
 }

@@ -1,4 +1,4 @@
-var app = angular.module('angularjsNodejsTutorial',[]);
+var app = angular.module('myApp',['ngRoute']);
 // app.controller('myController', function($scope, $http) {
 //         $scope.message="";
 //         $scope.Submit = function() {
@@ -13,35 +13,210 @@ var app = angular.module('angularjsNodejsTutorial',[]);
 //     }; 
 // });
 
-app.controller('insertController', function($scope, $http) {
-        $scope.message="";
-        $scope.Insert = function() {
-        var request = $http.get('/data/'+$scope.city+'/data/'+$scope.budget+'/data/'+$scope.timeStart+
-            '/data/'+$scope.timeEnd+'/data/'+$scope.day+'/data/'+$scope.occassion);
-        request.success(function(data) {
-            $scope.data = data;
-            console.log(data);
+app.config(function($routeProvider) {
+    $routeProvider
+
+        // route for the home page
+        .when('/', {
+            templateUrl : 'pages/main.html',
+            controller  : 'insertController'
+        })
+
+        // route for the about page
+        .when('/proposal', {
+            templateUrl : 'pages/proposal.html',
+            controller  : 'proposalController'
+        })
+
+        .when('/plan', {
+            templateUrl : 'pages/plan.html',
+            controller  : 'planController'
+        })
+});
+
+app.factory('proposalService', function() {
+ var activities = {};
+ var breakfast;
+ var lunch;
+ var dinner;
+ var city;
+ var occassion;
+ var day;
+ var timeStart;
+ var timeEnd;
+ function set(data, br, lu, din, cit, occassio, da, timeStar, timeEn) {
+   activities = data;
+   if (br) {
+    breakfast = true
+   }
+   if (lu) {
+    lunch = true
+   }
+   if (din) {
+    dinner = true
+   }
+   city = cit;
+   occassion = occassio;
+   day = da;
+   timeStart = timeStar;
+   timeEnd = timeEn;
+ };
+ function get() {
+  return activities;
+ };
+ function bre() {
+  return breakfast;
+ };
+ function lun() {
+  return lunch;
+ };
+ function din() {
+  return dinner;
+ };
+ function cit() {
+  return city;
+ };
+ function occas() {
+  return occassion;
+ };
+ function da() {
+  return day;
+ };
+ function timeStar() {
+  return timeStart;
+ };
+ function timeEn() {
+  return timeEnd;
+ };
+ return {
+  set: set,
+  get: get,
+  breakfast: bre,
+  lunch: lun,
+  dinner: din,
+  city: cit,
+  occassion: occas,
+  day: da,
+  timeStart: timeStar,
+  timeEnd: timeEn
+ }
+
+});
+app.controller('insertController', function($scope, $http, $window, proposalService) {
+    $scope.message="";
+    $scope.Insert = function() {
+        proposalService.set(undefined, undefined, undefined, undefined, 
+                undefined, undefined, undefined, undefined, undefined);
+        var request = $http.get('/data/'+$scope.city+'/'+$scope.timeStart+
+            '/'+$scope.timeEnd+'/'+$scope.day+'/'+$scope.occassion+'/'+$scope.breakfast+'/'+
+            $scope.lunch + '/' +$scope.dinner)
+        .then(function (result) {
+            proposalService.set(result, $scope.breakfast, $scope.lunch, $scope.dinner, 
+                $scope.city, $scope.occassion, $scope.day, $scope.timeStart, $scope.timeEnd);
+            //$scope.data = result;
+            $window.location.href = '#proposal';
+        }, function(result) {
+            //some error
+            console.log("ERROR");
         });
-        request.error(function(data){
-            console.log('err');
-        });
+        
     
     }; 
 });
 
-// app.controller('friendsController', function($scope, $http) {
-//         $scope.message="";
-//         $scope.Submit = function() {
-//         var request = $http.get('/friends/'+$scope.email);
-//         request.success(function(data) {
-//             $scope.data = data;
-//         });
-//         request.error(function(data){
-//             console.log('err');
-//         });
-    
-//     }; 
-// });
+app.controller('proposalController', function($scope, $http, proposalService) {
+        console.log("SDSDSD")
+        $scope.message="";
+        var all = undefined;
+        if (all == undefined) {
+             all = proposalService.get().data;
+        }
+        console.log(all)
+        if (proposalService.breakfast()) {
+            $scope.breakfast = all[0];
+            all.shift();
+        } 
+        if (proposalService.lunch()) {
+            $scope.lunch = all[0];
+            all.shift();
+        }
+        if (proposalService.dinner()) {
+            $scope.dinner = all[0];
+            all.shift();
+        }
+        if ($scope.data == undefined) {
+            console.log("OH FUCK")
+            $scope.data = all
+        }      
+        $scope.city = proposalService.city();
+        $scope.occassion= proposalService.occassion();
+        $scope.day = proposalService.day();
+        $scope.timeStart = proposalService.timeStart();
+        $scope.timeEnd = proposalService.timeEnd();
+        console.log($scope.city);
+        $scope.Replace = function(x, t, ind) {
+            console.log(ind)
+            console.log(t)
+            if (ind == -1) {
+                var request = $http.get('/update/'+$scope.city+'/'+$scope.timeStart+
+                '/'+$scope.timeEnd+'/'+$scope.day+'/'+t)
+                .then(function (result) {
+
+                    $scope.breakfast = result.data[Math.floor(Math.random()*result.data.length)];
+                    console.log($scope.data)
+                    //$window.location.href = '#proposal';
+                }, function(result) {
+                    //some error
+                    console.log("ERROR");
+                });
+            } else if (ind == -2) {
+                var request = $http.get('/update/'+$scope.city+'/'+$scope.timeStart+
+                '/'+$scope.timeEnd+'/'+$scope.day+'/'+t)
+                .then(function (result) {
+
+                    $scope.lunch = result.data[Math.floor(Math.random()*result.data.length)];
+                    console.log($scope.data)
+                    //$window.location.href = '#proposal';
+                }, function(result) {
+                    //some error
+                    console.log("ERROR");
+                });
+            } else if (ind == -3) {
+                var request = $http.get('/update/'+$scope.city+'/'+$scope.timeStart+
+                '/'+$scope.timeEnd+'/'+$scope.day+'/'+t)
+                .then(function (result) {
+
+                    $scope.dinner = result.data[Math.floor(Math.random()*result.data.length)];
+                    console.log($scope.data)
+                    //$window.location.href = '#proposal';
+                }, function(result) {
+                    //some error
+                    console.log("ERROR");
+                });
+            } else {
+                var request = $http.get('/update/'+$scope.city+'/'+$scope.timeStart+
+                '/'+$scope.timeEnd+'/'+$scope.day+'/'+t)
+                .then(function (result) {
+
+                    $scope.data[ind] = result.data[Math.floor(Math.random()*result.data.length)];
+                    console.log($scope.data)
+                    //$window.location.href = '#proposal';
+                }, function(result) {
+                    //some error
+                    console.log("ERROR");
+                });
+            }
+        }
+        $scope.Finalize = function() {
+            window.location.href='#plan'
+        }
+
+});
+
+app.controller('planController', function($scope, $http, proposalService) {
+
+
+});
 
 // app.controller('familyController', function($scope, $http) {
 //         $scope.message="";
