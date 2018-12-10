@@ -45,16 +45,27 @@ app.factory('proposalService', function() {
  var timeStart;
  var timeEnd;
  function set(data, br, lu, din, cit, occassio, da, timeStar, timeEn) {
-   activities = data;
+   var all = data.data;
+   //activities = data;
    if (br) {
-    breakfast = true
+     breakfast = all[0];
+     all.shift();
+   } else {
+     breakfast = undefined
    }
    if (lu) {
-    lunch = true
+     lunch = all[0];
+     all.shift();
+   } else {
+     lunch = undefined
    }
    if (din) {
-    dinner = true
+    dinner = all[0];
+    all.shift();
+   } else {
+     dinner = undefined
    }
+   activities = all;
    city = cit;
    occassion = occassio;
    day = da;
@@ -105,8 +116,8 @@ app.factory('proposalService', function() {
 app.controller('insertController', function($scope, $http, $window, proposalService) {
     $scope.message="";
     $scope.Insert = function() {
-        proposalService.set(undefined, undefined, undefined, undefined, 
-                undefined, undefined, undefined, undefined, undefined);
+        //proposalService.set(undefined, undefined, undefined, undefined, 
+        //        undefined, undefined, undefined, undefined, undefined);
         var request = $http.get('/data/'+$scope.city+'/'+$scope.timeStart+
             '/'+$scope.timeEnd+'/'+$scope.day+'/'+$scope.occassion+'/'+$scope.breakfast+'/'+
             $scope.lunch + '/' +$scope.dinner)
@@ -127,27 +138,10 @@ app.controller('insertController', function($scope, $http, $window, proposalServ
 app.controller('proposalController', function($scope, $http, proposalService) {
         console.log("SDSDSD")
         $scope.message="";
-        var all = undefined;
-        if (all == undefined) {
-             all = proposalService.get().data;
-        }
-        console.log(all)
-        if (proposalService.breakfast()) {
-            $scope.breakfast = all[0];
-            all.shift();
-        } 
-        if (proposalService.lunch()) {
-            $scope.lunch = all[0];
-            all.shift();
-        }
-        if (proposalService.dinner()) {
-            $scope.dinner = all[0];
-            all.shift();
-        }
-        if ($scope.data == undefined) {
-            console.log("OH FUCK")
-            $scope.data = all
-        }      
+        $scope.breakfast = proposalService.breakfast();
+        $scope.lunch = proposalService.lunch();
+        $scope.dinner = proposalService.dinner();
+        $scope.data = proposalService.get();
         $scope.city = proposalService.city();
         $scope.occassion= proposalService.occassion();
         $scope.day = proposalService.day();
@@ -208,14 +202,25 @@ app.controller('proposalController', function($scope, $http, proposalService) {
             }
         }
         $scope.Finalize = function() {
+            // var result = 
+            // proposalService.set(, $scope.breakfast, $scope.lunch, $scope.dinner, 
+            //     $scope.city, $scope.occassion, $scope.day, $scope.timeStart, $scope.timeEnd);
             window.location.href='#plan'
         }
 
 });
 
 app.controller('planController', function($scope, $http, proposalService) {
-
-
+    console.log("SDSDSD")
+        $scope.message="";
+        
+        $scope.city   
+        $scope.city = proposalService.city();
+        $scope.occassion= proposalService.occassion();
+        $scope.day = proposalService.day();
+        $scope.timeStart = proposalService.timeStart();
+        $scope.timeEnd = proposalService.timeEnd();
+        console.log($scope.city);
 });
 
 // app.controller('familyController', function($scope, $http) {

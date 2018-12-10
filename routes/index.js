@@ -108,27 +108,27 @@ router.get('/data/:city/:timeStart/:timeEnd/:day/:occassion/:breakfast/:lunch/:d
 	console.log(totalTime);
 	if (breakfast) {
 		totalTime = totalTime - 2;
-		query = '(SELECT * FROM welp.Businesses wb JOIN welp.Hours wh ON wb.business_id = wh.business_id WHERE wb.city = \'' + city + '\' AND wh.'+day+'_start <= "8:00" AND wh.'+day+'_end >= "12:00" AND wb.categories LIKE "%Breakfast & Brunch%" LIMIT 1)';
+		query = '(SELECT * FROM welp.Businesses wb JOIN welp.Hours wh ON wb.business_id = wh.business_id WHERE wb.city = \'' + city + '\' AND wh.'+day+'_start <= "8:00" AND wh.'+day+'_end >= "12:00" AND wb.categories LIKE "%Breakfast & Brunch%" AND wb.stars >= 4 LIMIT 1)';
 	}
-	if (lunch == true && dinner == true) {
+	if (lunch == 'true' && dinner == 'true') {
 		if (query != "") {
 			query += " UNION "
 		}
 		totalTime = totalTime - 4;
-		query += '(SELECT * FROM welp.Businesses wb JOIN welp.Hours wh ON wb.business_id = wh.business_id WHERE wb.city = \'' + city + '\' AND wh.'+day+'_start <= "12:00" AND wh.'+day+'_end >= "12:00" AND wb.categories LIKE "%Restaurants%" AND wb.categories NOT LIKE "%Breakfast & Brunch%" LIMIT 2)';
-	} else if (lunch == true || dinner == true) {
+		query += '(SELECT * FROM welp.Businesses wb JOIN welp.Hours wh ON wb.business_id = wh.business_id WHERE wb.city = \'' + city + '\' AND wh.'+day+'_start <= "12:00" AND wh.'+day+'_end >= "12:00" AND wb.categories LIKE "%Restaurants%" AND wb.categories NOT LIKE "%Breakfast & Brunch%" AND wb.stars >= 4 LIMIT 2)';
+	} else if (lunch == 'true' || dinner == 'true') {
 		if (query != "") {
 			query += " UNION "
 		}
 		totalTime = totalTime - 2;
-		query += '(SELECT * FROM welp.Businesses wb JOIN welp.Hours wh ON wb.business_id = wh.business_id WHERE wb.city = \'' + city + '\' AND wh.'+day+'_start <= "12:00" AND wh.'+day+'_end >= "12:00" AND wb.categories LIKE "%Restaurants%" AND wb.categories NOT LIKE "%Breakfast & Brunch%" LIMIT 1)';
+		query += '(SELECT * FROM welp.Businesses wb JOIN welp.Hours wh ON wb.business_id = wh.business_id WHERE wb.city = \'' + city + '\' AND wh.'+day+'_start <= "12:00" AND wh.'+day+'_end >= "12:00" AND wb.categories LIKE "%Restaurants%" AND wb.categories NOT LIKE "%Breakfast & Brunch%" AND wb.stars >= 4 LIMIT 1)';
 	}
 	if (totalTime > 2) {
 		if (query != "") {
 			query += " UNION "
 		}
-		limit = Math.floor(totalTime/3);
-		query += '(SELECT * FROM welp.Businesses wb JOIN welp.Hours wh ON wb.business_id = wh.business_id WHERE wb.city = \'' + city + '\' AND wb.categories LIKE "%' + occassion + '%" LIMIT ' + limit + ')';
+		limit = Math.floor(totalTime/2);
+		query += '(SELECT * FROM welp.Businesses wb JOIN welp.Hours wh ON wb.business_id = wh.business_id WHERE wb.city = \'' + city + '\' AND wb.categories LIKE "%' + occassion + '%" AND wb.stars >= 4 LIMIT ' + limit + ')';
 	}
 	console.log(query);
 	//console.log(city + "\t" + budget + "\t" + timeStart + "\t" + timeEnd + "\t" + day + "\t" + occassion);
