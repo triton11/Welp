@@ -3,19 +3,21 @@
   <table class="table table-striped"> 
     <thead>
         <tr> 
-            <td> Business   </td>
-            <td> Stars </td>
-            <td> Tip     </td>
-            <td> Review  </td>
+        	<td style="width:20%"> Time </td>
+            <td style="width:20%"> Business   </td>
+            <td style="width:10%"> Stars </td>
+            <td style="width:20%"> Tip     </td>
+            <td style="width:30%"> Review  </td>
         </tr>
     </thead>
     <!-- <td> Birthyear </td> -->
     <h3>Schedule:</h3>
-    <tr ng-repeat="x in data"> 
+    <tr ng-repeat="x in activities"> 
+    	<td> {{$index*2+timeStart}}:00 - {{2+$index*2+timeStart}}:00 </td>
         <td> {{x.name}}     </td>
         <td> {{x.stars}} </td>
-        <td> {{x.tip}}    </td>
-        <td> {{x.review}}    </td>
+        <td> {{tips[x.name]}}    </td>
+        <td> {{revs[x.name]}}    </td>
     </tr>
   </table>
 </div>

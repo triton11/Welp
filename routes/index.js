@@ -167,6 +167,31 @@ router.get('/data/:city/:timeStart/:timeEnd/:day/:occassion/:breakfast/:lunch/:d
 	});
 });
 
+router.get('/tips/:business_id', function(req,res) {
+	var id = req.params.business_id;
+	var query = 'SELECT wh.text, wb.name FROM welp.Businesses wb JOIN welp.Tips wh ON wb.business_id = wh.business_id WHERE wb.business_id= \'' + id + '\' LIMIT 1'
+	console.log(query)
+	connection.query(query, function(err, rows, fields) {
+		if (err) console.log(err);
+		else {
+			res.json(rows);
+		}
+	});
+});
+
+router.get('/revs/:business_id', function(req,res) {
+	var id = req.params.business_id;
+	var query = 'SELECT wh.text, wb.name FROM welp.Businesses wb JOIN welp.Reviews wh ON wb.business_id = wh.business_id WHERE wb.business_id= \'' + id + '\' LIMIT 1'
+	console.log(query)
+	connection.query(query, function(err, rows, fields) {
+		if (err) console.log(err);
+		else {
+			res.json(rows);
+		}
+	});
+});
+
+
 
 
 	// connection.query(query, function(err, rows, fields) {

@@ -136,7 +136,6 @@ app.controller('insertController', function($scope, $http, $window, proposalServ
 });
 
 app.controller('proposalController', function($scope, $http, proposalService) {
-        console.log("SDSDSD")
         $scope.message="";
         $scope.breakfast = proposalService.breakfast();
         $scope.lunch = proposalService.lunch();
@@ -147,7 +146,6 @@ app.controller('proposalController', function($scope, $http, proposalService) {
         $scope.day = proposalService.day();
         $scope.timeStart = proposalService.timeStart();
         $scope.timeEnd = proposalService.timeEnd();
-        console.log($scope.city);
         $scope.Replace = function(x, t, ind) {
             console.log(ind)
             console.log(t)
@@ -211,16 +209,98 @@ app.controller('proposalController', function($scope, $http, proposalService) {
 });
 
 app.controller('planController', function($scope, $http, proposalService) {
-    console.log("SDSDSD")
-        $scope.message="";
-        
-        $scope.city   
-        $scope.city = proposalService.city();
-        $scope.occassion= proposalService.occassion();
-        $scope.day = proposalService.day();
-        $scope.timeStart = proposalService.timeStart();
-        $scope.timeEnd = proposalService.timeEnd();
-        console.log($scope.city);
+    $scope.message="";
+    $scope.tips = {}
+    $scope.revs = {}
+    $scope.breakfast = proposalService.breakfast();
+    $scope.lunch = proposalService.lunch();
+    $scope.dinner = proposalService.dinner();
+    $scope.activity = proposalService.get();
+    $scope.city = proposalService.city();
+    $scope.occassion= proposalService.occassion();
+    $scope.day = proposalService.day();
+    $scope.timeStart = parseInt(proposalService.timeStart());
+    $scope.timeEnd = proposalService.timeEnd();
+    $scope.activities = []
+    if ($scope.breakfast != undefined) {
+        $scope.activities.push($scope.breakfast);
+        var request = $http.get('/tips/'+$scope.breakfast.business_id)
+        .then(function (result) {
+            console.log(result)
+            $scope.tips[$scope.breakfast.name] = result.data[0].text;
+        }, function(result) {
+            //some error
+            console.log("ERROR");
+        })
+        var request2 = $http.get('/revs/'+$scope.breakfast.business_id)
+        .then(function (result) {
+            console.log(result)
+            $scope.revs[$scope.breakfast.name] = result.data[0].text;
+        }, function(result) {
+            //some error
+            console.log("ERROR");
+        })
+    }
+    if ($scope.activity != undefined) {
+        $scope.activities = $scope.activities.concat($scope.activity);
+    }
+    if ($scope.dinner != undefined) {
+        $scope.activities.push($scope.dinner);
+        var request = $http.get('/tips/'+$scope.dinner.business_id)
+        .then(function (result) {
+            $scope.tips[$scope.dinner.name] = result.data[0].text;
+        }, function(result) {
+            //some error
+            console.log("ERROR");
+        })
+        var request2 = $http.get('/revs/'+$scope.dinner.business_id)
+        .then(function (result) {
+            $scope.revs[$scope.dinner.name] = result.data[0].text;
+        }, function(result) {
+            //some error
+            console.log("ERROR");
+        })
+    }
+    if ($scope.lunch != undefined) {
+        if ($scope.activities.length >= 2) {
+            middle = Math.floor($scope.activities.length/2);
+            $scope.activities.splice(middle, 0, $scope.lunch);
+        }
+        var request = $http.get('/tips/'+$scope.lunch.business_id)
+        .then(function (result) {
+            $scope.tips[$scope.lunch.name] = result.data[0].text;
+        }, function(result) {
+            //some error
+            console.log("ERROR");
+        })
+        var request2 = $http.get('/revs/'+$scope.lunch.business_id)
+        .then(function (result) {
+            $scope.revs[$scope.lunch.name] = result.data[0].text;
+        }, function(result) {
+            //some error
+            console.log("ERROR");
+        })
+    }
+    for (var i = 0; i < $scope.activity.length; i++) {
+        var request = $http.get('/tips/'+$scope.activity[i].business_id)
+        .then(function (result) {
+            if (result.data.name != undefined) {
+                $scope.tips[result.data.name] = result.data[0].text;
+            }
+        }, function(result) {
+            //some error
+            console.log("ERROR");
+        })
+        var request2 = $http.get('/revs/'+$scope.activity[i].business_id)
+        .then(function (result) {
+            if (result.data.name != undefined) {
+                $scope.revs[result.data.name] = result.data[0].text;
+            }
+        }, function(result) {
+            //some error
+            console.log("ERROR");
+        })
+    }
 });
 
 // app.controller('familyController', function($scope, $http) {
