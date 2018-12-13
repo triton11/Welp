@@ -1,5 +1,7 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 20px "Lato", Helvetica, Arial, sans-serif;
+  color: #ffffff;
+  background-image: url("bg.jpg");
 }
 
 a {
@@ -8,6 +10,10 @@ a {
 
 label {
 	font-weight: normal;
+}
+
+.navbar-default .navbar-brand {
+	color: #ffffff;
 }
 
 .form-group label {

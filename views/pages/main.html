@@ -18,7 +18,7 @@
     <form method="get" action="/">
       <div class="form-group">
       <label> Start Time: 
-      <select class="form-control" name="timeStart" ng-model="timeStart" id="ts" value="">
+      <select class="form-control" name="timeStart" ng-model="timeStart" id="ts" value="" placeholder="Start time">
          <option ng-selected="6">6</option>
          <option ng-selected="7">7</option>
          <option ng-selected="8">8</option>
@@ -45,7 +45,7 @@
     <form method="get" action="/">
         <div class="form-group">
           <label> End Time: 
-            <select class="form-control" name="timeEnd" ng-model="timeEnd" value="">
+            <select class="form-control" name="timeEnd" ng-model="timeEnd" value="" placeholder="End time">
                <option ng-selected="6">6</option>
                <option ng-selected="7">7</option>
                <option ng-selected="8">8</option>
@@ -74,13 +74,13 @@
       <div class="form-group">
         <label>Day: 
             <select class="form-control" name="day" ng-model="day">
-               <option ng-selected="monday">monday</option>
-               <option ng-selected="tuesday">tuesday</option>
-               <option ng-selected="wednesday">wednesday</option>
-               <option ng-selected="thursday">thursday</option>
-               <option ng-selected="friday">friday</option>
-               <option ng-selected="saturday">saturday</option>
-               <option ng-selected="sunday">sunday</option>
+               <option value="monday" selected>Monday</option>
+               <option value="tuesday">Tuesday</option>
+               <option value="wednesday">Wednesday</option>
+               <option value="thursday">Thursday</option>
+               <option value="friday">Friday</option>
+               <option value="saturday">Saturday</option>
+               <option value="sunday">Sunday</option>
             </select>
         </div>
       </label>

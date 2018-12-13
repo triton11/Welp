@@ -21,13 +21,13 @@
     <button class="btn btn-primary" ng-click="dinner = undefined">Remove</button></div>
 </span>
 <div class="container" align="center">
-  <table class="table table-striped"> 
+  <table class="table"> 
     <thead>
         <tr> 
-            <td> Business   </td>
-            <td> Categories     </td>
-            <td> Stars  </td>
-            <td> Replace? </td>
+            <td style="width:20%"> Business   </td>
+            <td style="width:30%"> Categories     </td>
+            <td style="width:10%"> Stars  </td>
+            <td style="width:20%"> Replace? </td>
         </tr>
     </thead>
     <!-- <td> Birthyear </td> -->
@@ -39,6 +39,7 @@
         <td> <button class="btn btn-primary" ng-click="Replace(x, 'Food', $index)">Food</button> </td>
         <td> <button class="btn btn-primary" ng-click="Replace(x, 'Active Life', $index)">Active Life</button> </td>
         <td> <button class="btn btn-primary" ng-click="Replace(x, 'Arts &amp; Entertainment', $index)">Arts &amp; Entertainment</button> </td>
+        <td> <button class="btn btn-primary" ng-click="Replace(x, '', $index)">Remove</button> </td>
     </tr>
   </table>
 </div>

@@ -72,15 +72,14 @@ router.use(express.static(path.join(__dirname, '../', 'views')));
 // });
 
 router.get('/update/:city/:timeStart/:timeEnd/:day/:occassion', function(req,res) {
-
 	var city = req.params.city;
 	var timeStart = req.params.timeStart;
 	var timeEnd = req.params.timeEnd;
 	var totalTime = timeEnd - timeStart;
 	var day = req.params.day;
 	var occassion = req.params.occassion;
-	var query = '(SELECT * FROM welp.Businesses wb JOIN welp.Hours wh ON wb.business_id = wh.business_id WHERE wb.city = \'' + city + '\' AND wh.'+day+'_start <= "8:00" AND wh.'+day+'_end >= "12:00" AND wb.categories LIKE "%' + occassion + '%" LIMIT 25)';
-	//console.log(query);
+	var query = '(SELECT * FROM welp.Businesses wb JOIN welp.Hours wh ON wb.business_id = wh.business_id WHERE wb.city = \'' + city + '\' AND wh.'+day+'_start <= "12:00" AND wh.'+day+'_end >= "12:00" AND wb.categories LIKE "%' + occassion + '%" LIMIT 25)';
+	console.log(query)
 	connection.query(query, function(err, rows, fields) {
 		if (err) console.log(err);
 		else {

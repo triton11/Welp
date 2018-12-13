@@ -149,7 +149,10 @@ app.controller('proposalController', function($scope, $http, proposalService) {
         $scope.Replace = function(x, t, ind) {
             console.log(ind)
             console.log(t)
-            if (ind == -1) {
+            if (t == "") {
+                $scope.data.splice(ind, 1)
+            }
+            else if (ind == -1) {
                 var request = $http.get('/update/'+$scope.city+'/'+$scope.timeStart+
                 '/'+$scope.timeEnd+'/'+$scope.day+'/'+t)
                 .then(function (result) {
