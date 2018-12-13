@@ -304,6 +304,23 @@ app.controller('planController', function($scope, $http, proposalService) {
             console.log("ERROR");
         })
     }
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var dayOfWeek = today.getDay();
+    var dif = 0;
+    var w = 'https://www.metaweather.com/api/location/search/?query='+$scope.city
+    console.log(w)
+    var weather = $http.get('/weather/'+$scope.city+'/1')
+    .then(function (result) {
+        $scope.weather = result.data.weather_state_name
+        $scope.wLow = result.data.min_temp
+        $scope.wHigh = result.data.max_temp
+        console.log(result)
+    }, function(result) {
+        //some error
+        console.log("ERROR");
+    })
+
 });
 
 // app.controller('familyController', function($scope, $http) {

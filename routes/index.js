@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-// const request = require('request');
+const request = require('request');
 // Connect string to MySQL
 var mysql = require('mysql');
 var connection = mysql.createConnection({
@@ -188,6 +188,24 @@ router.get('/revs/:business_id', function(req,res) {
 			res.json(rows);
 		}
 	});
+});
+
+router.get('/weather/:city/:day', function(req,res) {
+	var w = 'https://www.metaweather.com/api/location/search/?query='+req.params.city;
+    console.log(w)
+    request(w, (err, result, body) => {
+        var b = JSON.parse(body)
+        if (b[0] != undefined) {
+        	var we = 'https://www.metaweather.com/api/location/' + b[0].woeid
+            request(we, (err, result, bod) => {
+            	var bo = JSON.parse(bod)
+            	console.log(bo.consolidated_weather[0])
+                res.json(bo.consolidated_weather[0]);
+            })
+        } else {
+        	console.log("OHNOHON")
+        }
+    })
 });
 
 
